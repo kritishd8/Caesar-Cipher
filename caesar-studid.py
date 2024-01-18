@@ -3,6 +3,7 @@ exit_message = '\nThanks for using the program, goodbye!'
 again_message = "\nWould you like to encrypt or decrypt another message? (y/n): "
 action_message = '\nWould you like to encrypt (e) or decrypt (d) ?: '
 
+
 #? Welcome Message
 def welcome():
     '''
@@ -17,7 +18,8 @@ def welcome():
 
     print('\nWelcome to the Caesar Cipher.\nThis program encrypts and decrypts text with the Caesar Cipher.')
 
-#? Take inputs
+
+#? Take mode input
 def enter_message(action):   
     '''
     Returns a tuple containing user selected mode, user input message, and shift number
@@ -44,6 +46,7 @@ def enter_message(action):
 
     return (action, message, shift)
 
+
 #? Function to encrypt the message
 def encrypt(message, shift):
     '''
@@ -68,6 +71,7 @@ def encrypt(message, shift):
     
     return f"\n{encrypted}"
 
+
 #? Function to decrypt the message
 def decrypt(message, shift):
     '''
@@ -91,6 +95,7 @@ def decrypt(message, shift):
             decrypted += alphabets[index] 
     
     return f"\n{decrypted}"
+
 
 #? Take the file and read line by line and encrypt it and store it in a list
 def process_file(filename, action):
@@ -120,6 +125,7 @@ def process_file(filename, action):
     
     return actioned_list
 
+
 #? Checks if a file exists
 def is_file(filename):
     '''
@@ -137,6 +143,7 @@ def is_file(filename):
             pass
         return True
     except: return False
+
 
 #? Write encrypted message to a new file
 def write_messages(message_list):
@@ -158,6 +165,7 @@ def write_messages(message_list):
         with open('results.txt', 'x') as file:
             for items in message_list:
                 file.write(f'{items}\n')
+
 
 #? Console mode or File mode, do appropriate action
 def message_or_file():
@@ -203,6 +211,7 @@ def message_or_file():
         else:
             print('Invalid Choice. Please choose "e" or "d"!')
 
+
 def print_result(values):
     '''
     Prints the encrypted/decrypted message
@@ -228,6 +237,7 @@ def print_result(values):
         
         else:
             main()
+
 
 #? Main function to start the program
 def main():
