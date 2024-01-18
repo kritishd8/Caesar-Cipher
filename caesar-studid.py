@@ -173,17 +173,22 @@ def message_or_file():
 
     while 1:
         action = input(action_message).lower()
+
         if action in ('e', 'd'):
             console = input('\nDo you want to process messages using console or file? (c for console, f for file) ')
 
             if console == 'f':
                 filename = input('\nEnter file name with it\'s extension: ')
                 if is_file(filename):
+
                     try:
                         write_messages(process_file(filename, action))
                         print('\nAction completed successfully.')
-                    except: print('\nSome error occured!')
+                    except:
+                        print('\nSome error occured!')
+                    
                     break
+
                 else:
                     print('\nFile not found!!\nTry Again!\n')
 
@@ -194,6 +199,7 @@ def message_or_file():
 
             else:
                 print('\nInvalid Choice. Please choose "f" or "c"!')
+
         else:
             print('Invalid Choice. Please choose "e" or "d"!')
 
@@ -211,12 +217,15 @@ def print_result(values):
     if values != None:
         if values[0] == 'e':
             print(encrypt(values[1], values[2]))
+
         elif values[0] == 'd':
             print(decrypt(values[1], values[2]))
 
         try_again = input(again_message)
+        
         if try_again == 'n':
             print(exit_message)
+        
         else:
             main()
 
@@ -232,8 +241,13 @@ def main():
                     None
     '''
 
+    #? Printing the welcome message first before doing anything else
     welcome()
+
+    #? Getting action, message and shift values to use
     values = message_or_file()
+
+    #? Sending the action, message and shift values to encrypt/decrypt and print
     print_result(values)
 
 
