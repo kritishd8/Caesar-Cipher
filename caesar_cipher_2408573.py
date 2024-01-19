@@ -1,18 +1,19 @@
-'''
+"""
     Caesar Cipher Program
     Student Name: Kritish Dhakal
     Student ID: 2408573
-'''
+"""
 
-ALPHABETS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ'
-EXIT_MESSAGE = '\nThanks for using the program, goodbye!'
+ALPHABETS = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ"
+EXIT_MESSAGE = "\nThanks for using the program, goodbye!"
 AGAIN_MESSAGE = "\nWould you like to encrypt or decrypt another message? (y/n): "
-ACTION_MESSAGE = '\nWould you like to encrypt (e) or decrypt (d)?: '
-ENCODING="utf-8"
+ACTION_MESSAGE = "\nWould you like to encrypt (e) or decrypt (d)?: "
+ENCODING = "utf-8"
+
 
 # ? Welcome Message
 def welcome():
-    '''
+    """
     Prints the welcome message
 
             Parameters:
@@ -20,15 +21,15 @@ def welcome():
 
             Returns:
                     None
-    '''
+    """
 
-    print('\nWelcome to the Caesar Cipher.')
-    print('This program encrypts and decrypts text with the Caesar Cipher.')
+    print("\nWelcome to the Caesar Cipher.")
+    print("This program encrypts and decrypts text with the Caesar Cipher.")
 
 
 # ? Take mode input
 def enter_message(action):
-    '''
+    """
     Returns a tuple containing user selected mode, user input message, and shift number
 
             Parameters:
@@ -36,17 +37,17 @@ def enter_message(action):
 
             Returns:
                     a tuple like: (action, message, shift)
-    '''
+    """
 
-    if action == 'e':
-        message = input('\nWhat message would you like to encrypt: ')
+    if action == "e":
+        message = input("\nWhat message would you like to encrypt: ")
         message = message.upper()
-        shift = int(input('What is the shift number: '))
+        shift = int(input("What is the shift number: "))
 
-    elif action == 'd':
-        message = input('\nWhat message would you like to decrypt: ')
+    elif action == "d":
+        message = input("\nWhat message would you like to decrypt: ")
         message = message.upper()
-        shift = int(input('What is the shift number: '))
+        shift = int(input("What is the shift number: "))
 
     else:
         print('\nInvalid Mode!! Please select "e" or "d". ')
@@ -56,7 +57,7 @@ def enter_message(action):
 
 # ? Function to encrypt the message
 def encrypt(message, shift):
-    '''
+    """
     Returns encrypted version of the given message using given shift
 
             Parameters:
@@ -65,12 +66,12 @@ def encrypt(message, shift):
 
             Returns:
                     String containing the encrypted message
-    '''
+    """
 
-    encrypted = ''
+    encrypted = ""
 
     for letter in message:
-        if letter in ('', ' ', '\n'):
+        if letter in ("", " ", "\n"):
             encrypted += letter
         else:
             index = ALPHABETS.index(letter) + shift
@@ -81,7 +82,7 @@ def encrypt(message, shift):
 
 # ? Function to decrypt the message
 def decrypt(message, shift):
-    '''
+    """
     Returns decrypted version of the given message using given shift
 
             Parameters:
@@ -90,12 +91,12 @@ def decrypt(message, shift):
 
             Returns:
                     String containing the decrypted message
-    '''
+    """
 
-    decrypted = ''
+    decrypted = ""
 
     for letter in message:
-        if letter in ('', ' ', '\n'):
+        if letter in ("", " ", "\n"):
             decrypted += letter
         else:
             index = ALPHABETS.index(letter) - shift
@@ -106,7 +107,7 @@ def decrypt(message, shift):
 
 # ? Take the file and read line by line and encrypt it and store it in a list
 def process_file(filename, action):
-    '''
+    """
     Returns a list after performing the given action on each line with the shift
 
             Parameters:
@@ -115,9 +116,9 @@ def process_file(filename, action):
 
             Returns:
                     List containing encrypted/decrypted version of every line from file
-    '''
+    """
 
-    shift = int(input('What is the shift number: '))
+    shift = int(input("What is the shift number: "))
     actioned_list = []
 
     with open(filename, encoding=ENCODING) as file:
@@ -125,9 +126,9 @@ def process_file(filename, action):
 
     with open(filename, encoding=ENCODING) as file:
         for _ in range(length):
-            if action == 'e':
+            if action == "e":
                 actioned_list.append(encrypt(file.readline().upper(), shift))
-            elif action == 'd':
+            elif action == "d":
                 actioned_list.append(decrypt(file.readline().upper(), shift))
 
     return actioned_list
@@ -135,7 +136,7 @@ def process_file(filename, action):
 
 # ? Checks if a file exists
 def is_file(filename):
-    '''
+    """
     Returns True if file exists and False if it doesnt exist
 
             Parameters:
@@ -143,7 +144,7 @@ def is_file(filename):
 
             Returns:
                     Returns a boolean based on if the file exist or not
-    '''
+    """
 
     try:
         with open(filename, encoding=ENCODING):
@@ -152,10 +153,9 @@ def is_file(filename):
         return False
 
 
-
 # ? Write encrypted message to a new file
 def write_messages(message_list):
-    '''
+    """
     Writes data from the given list to results.txt file (creates the file if it doesnt exist)
 
             Parameters:
@@ -163,21 +163,21 @@ def write_messages(message_list):
 
             Returns:
                     None
-    '''
+    """
 
-    if is_file('results.txt'):
-        with open('results.txt', 'a', encoding=ENCODING) as file:
+    if is_file("results.txt"):
+        with open("results.txt", "a", encoding=ENCODING) as file:
             for items in message_list:
-                file.write(f'{items}\n')
+                file.write(f"{items}\n")
     else:
-        with open('results.txt', 'x', encoding=ENCODING) as file:
+        with open("results.txt", "x", encoding=ENCODING) as file:
             for items in message_list:
-                file.write(f'{items}\n')
+                file.write(f"{items}\n")
 
 
 # ? Console mode or File mode, do appropriate action
 def message_or_file():
-    '''
+    """
     Takes user input for if they want to enter console mode or file mode.
 
             Parameters:
@@ -185,32 +185,33 @@ def message_or_file():
 
             Returns:
                     None
-    '''
+    """
 
     while True:
         action = input(ACTION_MESSAGE).lower()
 
-        if action in ('e', 'd'):
+        if action in ("e", "d"):
             console = input(
-                '\nDo you want to process messages using console or file? (c or f) ')
+                "\nDo you want to process messages using console or file? (c or f) "
+            )
 
-            if console == 'f':
-                filename = input('\nEnter file name with it\'s extension: ')
+            if console == "f":
+                filename = input("\nEnter file name with it's extension: ")
                 if is_file(filename):
                     write_messages(process_file(filename, action))
-                    print('\nAction completed successfully.')
+                    print("\nAction completed successfully.")
 
                     try_again = input(AGAIN_MESSAGE)
 
-                    if try_again == 'n':
+                    if try_again == "n":
                         return print(EXIT_MESSAGE)
 
                     main()
 
                 else:
-                    print('\nFile not found!!\nTry Again!\n')
+                    print("\nFile not found!!\nTry Again!\n")
 
-            elif console == 'c':
+            elif console == "c":
                 return enter_message(action)
 
             else:
@@ -222,7 +223,7 @@ def message_or_file():
 
 # ? Main function to start the program and also print the output
 def main():
-    '''
+    """
     Main function to run all other functions in order
 
             Parameters:
@@ -230,7 +231,7 @@ def main():
 
             Returns:
                     None
-    '''
+    """
 
     # ? Printing the welcome message
     welcome()
@@ -239,20 +240,21 @@ def main():
     values = message_or_file()
 
     if values is not None:
-        if values[0] == 'e':
+        if values[0] == "e":
             print(encrypt(values[1], values[2]))
 
-        elif values[0] == 'd':
+        elif values[0] == "d":
             print(decrypt(values[1], values[2]))
 
         try_again = input(AGAIN_MESSAGE)
 
-        if try_again == 'n':
+        if try_again == "n":
             return print(EXIT_MESSAGE)
 
         main()
 
     return None
+
 
 # ? Start
 main()
